@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20151022211350) do
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.string   "body",        null: false
-    t.string   "title",       null: false
+    t.text     "body",        null: false
     t.integer  "user_id",     null: false
     t.integer  "question_id", null: false
     t.datetime "created_at",  null: false
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 20151022211350) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "title",      null: false
-    t.string   "body",       null: false
+    t.text     "body",       null: false
     t.integer  "user_id",    null: false
     t.integer  "answer_id"
     t.datetime "created_at", null: false
@@ -82,7 +81,6 @@ ActiveRecord::Schema.define(version: 20151022211350) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
-    t.string   "email"
     t.string   "password_digest", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -90,7 +88,7 @@ ActiveRecord::Schema.define(version: 20151022211350) do
 
   add_index "users", ["created_at"], name: "index_users_on_created_at", using: :btree
   add_index "users", ["updated_at"], name: "index_users_on_updated_at", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "value",         null: false

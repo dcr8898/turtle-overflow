@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    username "johndoe"
+    username { Faker::Internet.user_name }
     password  "password"
   end
 
@@ -21,13 +21,13 @@ FactoryGirl.define do
 
   factory :answer do
     body { Faker::Hacker.say_something_smart }
-    association :user, username: "jamesdoe"
+    association :user
     association :question
   end
 
   factory :comment do
     body { Faker::Company.bs }
-    association :user, username: "janedoe"
+    association :user
     association :question
     
     factory :answer_comment do

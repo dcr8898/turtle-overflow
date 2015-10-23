@@ -5,5 +5,6 @@ class TagsController < ActionController::Base
 
   def show
     @tag = Tag.find_by(id: params[:id])
+    @questions = @tag.questions
   end
 end

@@ -28,11 +28,21 @@ FactoryGirl.define do
   factory :comment do
     body { Faker::Company.bs }
     association :user
-    association :question
+    association :commentable, factory: :question
     
     factory :answer_comment do
-      commentable "Answer" 
+      association :commentable, factory: :answer 
     end
   end
+
+  factory :vote do
+    association :user
+    association :voteable, factory: :question
+
+    factory :answer_vote do
+      association :voteable, factory: :answer
+    end
+  end
+
 
 end

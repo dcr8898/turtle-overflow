@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="twelve columns">
+    <h1>Browse Questions by Tag</h1>
+  </div>
+</div>
+
+<ul class="tags u-full-width">
+  <% @tags.each do |tag| %>
+    <%= render partial: 'tag', locals: { tag: tag } %>
+  <% end %>
+</ul>

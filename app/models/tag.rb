@@ -1,6 +1,5 @@
 class Tag < ActiveRecord::Base
-  has_many :questions_tags
-  has_many :question, through: :questions_tags
+  has_and_belongs_to_many :questions
 
   validates :text, presence: true
 end

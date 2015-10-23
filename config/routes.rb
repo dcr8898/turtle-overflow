@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'questions#index'
 
-  resource :questions, only [:index, :show]
+  resources :questions, only: [:index, :show]
 
   get    'login',  to: 'sessions#new'
   post   'login',  to: 'sessions#create'

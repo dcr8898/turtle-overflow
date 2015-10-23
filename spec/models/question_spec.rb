@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Question do
-  # let(:question) { FactoryGirl.build :question }
+  let(:question) { FactoryGirl.build :question }
 
   context "validations" do
     it { should validate_presence_of :title }
@@ -13,9 +13,17 @@ describe Question do
     it { should belong_to :user}
     it { should belong_to :answer}
     it { should have_many :answers} 
-    it { should has_and_belong_to_many :tags}  
+    it { should have_and_belong_to_many :tags}  
     it { should have_many :comments} 
     it { should have_many :votes}  
+    it "has many answers" do
+    expect {
+      question.answers << FactoryGirl.build(:answer)
+      }.to change { Question.count }.by(1)
+    end
   end
 
+  it "question should be unanswered by default" do
+    expect (question.answer).should be_nil
+  end
 end

@@ -1,28 +1,18 @@
-== README
+== Turtle Overflow
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Turtle Overflow is a clone of the popular Stack Overflow site built as a learning exercise by [Steven Leiva] (https://github.com/stevenxl), [Peter Rosal](https://github.com/r05al), and [Damian Rossney](https://github.com/dcr8898).
 
-Things you may want to cover:
+Technologies used:
 
-* Ruby version
+* Ruby 2.2.3
 
-* System dependencies
+* Rails 4.2.1
 
-* Configuration
+* JQuery 2.1.3
 
-* Database creation
+* Postgres 9.3
 
-* Database initialization
+* Skeleton CSS
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+##Development
+We utilized a streamlined agile process based on the Kanban system (see Our Process above).  To ensure proper git hygiene, we utilized the [Steven G. Harms Enhanced Rebase Optimized Team Enabled Git Workflow(tm)](https://github.com/nyc-mud-turtles-2015/phase-2-guide/blob/nyc/resources/git_workflow.md).

@@ -1,14 +1,14 @@
 FactoryGirl.define do
   factory :user do
     username "johndoe"
-    password  "johndoe"
+    password  "password"
   end
 
   factory :question do
     title { Faker::Hacker.ingverb + " " + Faker::Book.title }
     body { Faker::Lorem.paragraph }
     association :user
-    answer "nil"
+    answer nil
 
     factory :answered_question do
       association :answer
@@ -20,18 +20,19 @@ FactoryGirl.define do
   end
 
   factory :answer do
-    text { Faker::Hacker.say_something_smart }
-    association :user
+    body { Faker::Hacker.say_something_smart }
+    association :user, username: "jamesdoe"
     association :question
   end
 
-  factory :question_comment do
-    text { Faker::Company.bs }
-    association :user
-    commentable "Question"
+  factory :comment do
+    body { Faker::Company.bs }
+    association :user, username: "janedoe"
+    association :question
     
     factory :answer_comment do
       commentable "Answer" 
     end
   end
+
 end

@@ -1,6 +1,6 @@
 class TagsController < ActionController::Base
   def index
-    @tags = Tag.all
+    @tags = Tag.all.order(:text)
   end
 
   def show

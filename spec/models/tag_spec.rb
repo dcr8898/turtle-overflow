@@ -1,19 +1,16 @@
 require 'rails_helper'
 
 describe Tag do
-  let(:tag) { FactoryGirl.build :tag }
 
-  it "" do
-    expect {}.to eq()
+  context "validations" do
+    it { should validate_presence_of :text }
   end
 
-    it "" do
-    expect {}.to be()
+  context "associations" do
+    it { should have_and_belong_to_many :questions}  
   end
 
-  it "" do
-    expect {}.to change {}.from().to()
-  end
+
 
 
 end

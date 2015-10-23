@@ -1,4 +1,4 @@
-== Turtle Overflow
+##Turtle Overflow
 
 Turtle Overflow is a clone of the popular Stack Overflow site built as a learning exercise by [Steven Leiva](https://github.com/stevenxl), [Peter Rosal](https://github.com/r05al), and [Damian Rossney](https://github.com/dcr8898).
 

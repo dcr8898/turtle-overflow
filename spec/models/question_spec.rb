@@ -1,26 +1,21 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Question do
-  let(:question) do
-    question = Question.new
-    question.title
-    question.body
-    question.user
-  end
+  # let(:question) { FactoryGirl.build :question }
 
   context "validations" do
     it { should validate_presence_of :title }
     it { should validate_presence_of :body }
     it { should validate_presence_of :user }
-    it { should allow_value('shadi@devbootcamp.com').for(:title) }
-    it { should_not allow_value('badlyFormattedEmail').for(:title) }
   end
 
-  context "#name" do
-    let(:user) { FactoryGirl.build :user, :email => "shadi@dev.com" }
-    it "sets the name as the first part of the email" do
-      user.save
-      expect(user.reload.name).to eq "shadi"
-    end
+  context "associations" do
+    it { should belong_to :user}
+    it { should belong_to :answer}
+    it { should have_many :answers} 
+    it { should has_and_belong_to_many :tags}  
+    it { should have_many :comments} 
+    it { should have_many :votes}  
   end
+
 end

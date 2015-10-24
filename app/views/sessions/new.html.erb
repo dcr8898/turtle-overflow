@@ -1,4 +1,5 @@
 <%= form_for(:session, url: login_path) do |f| %>
+  <ul><%= render partial:'shared/error', collection: @errors %></ul>
   <div>
     <%= f.label :username %>
     <%= f.text_field :username %>

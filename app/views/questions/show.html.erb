@@ -1,0 +1,27 @@
+<div id="question-header">
+	<h4><%= @question.title %></h4>
+</div>
+
+<div class="row">
+	<div class="one column"><%= pluralize(@question.votes.count, "vote") %></div>
+	<div class="eleven columns"><%= @question.body %>
+		<%= render @question.tags %>
+		asked <%= @question.created_at %> <%= link_to @question.user.username %>
+	</div>
+</div>
+<%= render @question.comments %>
+
+<div class="row">
+<h5><%= pluralize(@question.answers.count, "Answer") %></h5>
+</div>
+
+<% if @answer %>
+	<%= render @answer %>		
+	<%= render @answer.comments %>
+<% end %>
+
+<% @question.answers.each do |answer| %>
+	<%= render answer %>
+	<%= render answer.comments %>
+<% end %>
+<h5>Your Answer</h5>

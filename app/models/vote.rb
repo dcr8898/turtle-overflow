@@ -5,5 +5,6 @@ class Vote < ActiveRecord::Base
   validates :user, presence: true
 
   validates :value, numericality: { only_integer: true }
-  validates :value, uniqueness: { scope: :user_id, message: "You have already voted." }
+  validates :user_id, uniqueness: { scope: [:voteable_type, :voteable_id], message: "You have already voted." }
+
 end

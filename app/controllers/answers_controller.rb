@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to question_path(@answer.question, anchor: @answer.id)
     else
-      redirect_to question_path(@answer.question, anchor: 'new_answer', flash: {error: @answer.errors.full_messages.join(', ')})
+      redirect_to question_path(@answer.question, anchor: 'new_answer'), flash: {error: @answer.errors.full_messages.join(', ') }
     end
   end
 

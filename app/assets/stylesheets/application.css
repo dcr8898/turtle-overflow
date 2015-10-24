@@ -31,6 +31,18 @@
     -o-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
 }
 
-.row {
-	border-top: 1px solid black;
+#question-header {
+    clear: both;
+    padding: 5px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 1em;
+}
+
+.comments {
+	padding: 6px 6px 6px 0;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    line-height: 135%;
+    font-size: 13px;
+    border-top: 1px solid #e0e0e0;
 }

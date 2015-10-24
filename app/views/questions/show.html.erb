@@ -11,10 +11,6 @@
 </div>
 <%= render @question.comments %>
 
-<% if flash[:errors] %>
-	<%= flash[:errors] %>
-<% end %>
-
 <%= form_for @comment, url: question_comments_path(@question) do |f| %>
   <p>
     <%= f.label :Comment %><br>
@@ -24,6 +20,10 @@
   <p>
     <%= f.submit %>
   </p>
+<% end %>
+
+<% if flash[:error] %>
+	<%= flash[:error] %>
 <% end %>
 
 <div class="row">

@@ -9,4 +9,8 @@ class QuestionsController < ApplicationController
     @answers = @question.answers.order('votes_count desc')
   end
 
+  def unanswered
+    @questions = Question.where("answer_id is ?", nil)
+    render 'index'
+  end
 end

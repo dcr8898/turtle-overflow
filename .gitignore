@@ -11,3 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
+/coverage
+
+# Ignore gemset config.
+.ruby-gemset

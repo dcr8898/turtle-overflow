@@ -15,34 +15,3 @@
  *= require normalize
  *= require skeleton
  */
-
-.post-tag {
-    color: #3e6d8e;
-    font-size: 12px;
-    white-space: nowrap;
-    background: #e4edf4;
-    border: 1px solid #e4edf4;
-    display: inline-block;
-    margin: 2px 2px 2px 0;
-    border-radius: 0;
-    -webkit-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
-    -moz-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
-    -ms-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
-    -o-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
-}
-
-#question-header {
-    clear: both;
-    padding: 5px 0;
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 1em;
-}
-
-.comments {
-	padding: 6px 6px 6px 0;
-    margin-top: 10px;
-    padding-bottom: 10px;
-    line-height: 135%;
-    font-size: 13px;
-    border-top: 1px solid #e0e0e0;
-}

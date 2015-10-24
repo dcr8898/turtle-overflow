@@ -1,5 +1,5 @@
 <div class="row comments">
 	<div class="one column"></div>
 	<div class="one column"><%= comment.votes.count %></div>
-	<div class="ten columns"><%= comment.body %> - <%= link_to comment.user.username %> <%= comment.updated_at %></div>
+	<div class="ten columns"><article id="<%= comment.id %>"><%= comment.body %> - <%= link_to comment.user.username %> <%= comment.updated_at %></article></div>
 </div>

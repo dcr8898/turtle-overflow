@@ -6,6 +6,6 @@
 
 <ul class="tags u-full-width">
   <% @tags.each do |tag| %>
-    <%= render partial: 'tag', locals: { tag: tag } %>
+    <li><%= render partial: 'tag', locals: { tag: tag } %></li>
   <% end %>
 </ul>

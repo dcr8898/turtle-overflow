@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to question_path(@comment.commentable, anchor: @comment.id)
     else
-      redirect_to question_path(@comment.commentable, anchor: 'new_comment', flash: {error: @comment.errors.full_messages.join(', ')})
+      redirect_to question_path(@comment.commentable, anchor: 'new_comment'), flash: { error: @comment.errors.full_messages.join(', ') }
     end
   end
 

@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.user = User.last #current_user
+    @comment.user = current_user
     if params[:answer_id]
       @comment.commentable = Answer.find(params[:answer_id])
       if @comment.save

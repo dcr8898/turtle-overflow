@@ -98,6 +98,7 @@ Question.all.each do |question|
   end
   if rand < 0.8
     question.answer = question.answers.sample
+    question.save
   end
 end
 puts "Done!"

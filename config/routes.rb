@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   root to: 'questions#index'
 
-  # this route must appear before the questions resource
-  # otherwise, "questions#show" will match first
   get    'questions/unanswered', to: 'questions#unanswered'
 
-  resources :questions, only: [:index, :show]
+  resources :questions, only: [:index, :show] do
+    resources :answers, only: [:create] do
+      resources :comments, only: [:create]
+    end
+    resources :comments, only: [:create]
+  end
 
   get    'login',  to: 'sessions#new'
   post   'login',  to: 'sessions#create'

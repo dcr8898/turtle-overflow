@@ -7,4 +7,9 @@ class Question < ActiveRecord::Base
   has_many   :votes, as: :voteable
 
   validates :title, :body, :user, presence: true
+
+  scope :most_voted, -> {
+    order('votes_count DESC')
+  }
+
 end

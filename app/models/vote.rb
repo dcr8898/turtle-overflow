@@ -13,12 +13,9 @@ class Vote < ActiveRecord::Base
     self.voteable.votes.sum(:value)
   end 
 
-  def unchosen_answers
-    if self.answer
-      self.answers.where.not(id: self.answer.id).order('votes_count desc')  
-    else
-      self.answers
-    end
+  def update_vote_count
+    self.voteable.votes_count = self.total_votes
+    self.voteable.save
   end
 
 end

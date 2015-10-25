@@ -11,6 +11,21 @@
 </div>
 <%= render @question.comments %>
 
+<%= form_for @comment, url: question_comments_path(@question) do |f| %>
+  <p>
+    <%= f.label :Comment %><br>
+    <%= f.text_area :body %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<% if flash[:error] %>
+	<%= flash[:error] %>
+<% end %>
+
 <div class="row">
 <h5><%= pluralize(@question.answers.count, "Answer") %></h5>
 </div>
@@ -23,5 +38,25 @@
 <% @answers.each do |answer| %>
 	<%= render answer %>
 	<%= render answer.comments %>
+	<%= form_for @comment, url: question_answer_comments_path(@question, answer) do |f| %>
+	  <p>
+	    <%= f.label :Comment %><br>
+	    <%= f.text_area :body %>
+	  </p>
+	 
+	  <p>
+	    <%= f.submit %>
+	  </p>
+	<% end %>
 <% end %>
 <h5>Your Answer</h5>
+	<%= form_for @new_answer, url: question_answers_path(@question) do |f| %>
+	  <p>
+	    <%= f.label :Comment %><br>
+	    <%= f.text_area :body %>
+	  </p>
+	 
+	  <p>
+	    <%= f.submit %>
+	  </p>
+	<% end %>

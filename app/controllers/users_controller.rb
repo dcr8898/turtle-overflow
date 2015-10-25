@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Successfully Registered. You are now logged in."
       redirect_to root_path
     else
+      flash.now.alert = @user.errors.full_messages.join(', ')
       render 'new'
     end
   end

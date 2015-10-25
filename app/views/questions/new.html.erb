@@ -1,12 +1,16 @@
 <h4>Ask a question</h4>
 <%= form_for(:question, url: questions_path) do |f| %>
   <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'u-full-width' %>
+  </div>
+  <div>
     <%= f.label :body %>
     <%= f.text_area :body, size: '80x12', class: 'u-full-width' %>
   </div>
   <div>
-    <%= f.label :tags %>
-    <%= f.text_field :tags, class: 'u-full-width', value: '' %>
+    <%= label_tag :tags_text, "Tags (comma separated: example, 'ruby, rails')" %>
+    <%= text_field_tag 'question[tags_text]', nil, id: 'tags_text', class: 'u-full-width' %>
   </div>
-  <%= f.submit "Post question", class: "button-primary" %>
+  <%= f.submit "Post question", class: 'button-primary' %>
 <% end %>

@@ -9,6 +9,16 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    tags_text = params[:question].delete('tags_text')
+    @question = Question.new(question_params)
+    @question.user = current_user
+    @question.add_tags(tags_text)
+    if @question.save
+      redirect_to @question
+    else
+      flash.now.alert = @question.errors.full_messages.join(', ')
+      render new_question_path
+    end
   end
 
   def show
@@ -27,7 +37,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:body, :tags)
+    params.require(:question).permit(:title, :body)
   end
 
 end

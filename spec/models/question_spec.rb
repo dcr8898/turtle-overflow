@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Question do
   let(:question) { FactoryGirl.build :question }
+  let(:tag) { FactoryGirl.create :tag }
 
   context "validations" do
     it { should validate_presence_of :title }
@@ -28,7 +29,11 @@ describe Question do
   end
 
   context "#add_tags" do
-    it "parses valid string and adds corresponding tag objects" do
+    it "parses valid string and adds corresponding existing tag objects" do
+      question.add_tags(tag.text)
+      expect(question.tags).to include(tag)
+    end
+    it "parses valid string and adds corresponding new tag objects" do
       expect {
         question.add_tags('test1, test2')
       }.to change { Tag.count }.by(2)

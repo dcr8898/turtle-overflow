@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   get    'questions/unanswered', to: 'questions#unanswered'
 
-  resources :questions, only: [:index, :create, :new, :show] 
+  resources :questions, only: [:index, :create, :new, :show] do
+    post 'vote', on: :member
+  end
 
   resources :comments, only: [:create]
   resources :answers, only: [:create]

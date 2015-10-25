@@ -1,5 +1,7 @@
-<div class="one column"><%= pluralize(question.votes.count, "vote") %></div>
-<div class="one column"><%= pluralize(question.answers.count, "answer") %></div>
-<div class="ten columns"><%= link_to question.title, question_path(question) %>
-  <%= render question.tags %> asked <%= question.created_at %> <%= link_to question.user.username %>
+<div class="row question">
+  <div class="one column"><%= pluralize(question.votes.count, "vote") %></div>
+  <div class="one column"><%= pluralize(question.answers.count, "answer") %></div>
+  <div class="ten columns"><%= link_to question.title, question_path(question) %>
+    <%= render question.tags %> asked <%= question.created_at %> <%= link_to question.user.username %>
+  </div>
 </div>

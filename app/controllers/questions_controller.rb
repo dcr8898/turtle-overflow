@@ -1,6 +1,14 @@
 class QuestionsController < ApplicationController
+
   def index
     @questions = Question.most_voted
+  end
+
+  def new
+    @question = Question.new
+  end
+
+  def create
   end
 
   def show
@@ -15,4 +23,5 @@ class QuestionsController < ApplicationController
     @questions = Question.where("answer_id is ?", nil)
     render 'index'
   end
+
 end

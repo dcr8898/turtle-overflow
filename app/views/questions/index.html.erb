@@ -1,7 +1,5 @@
 <h5>Top Questions</h5>
 
 <% @questions.each do |question| %>
-<div class="row">
   <%= render partial: 'question', locals: {question: question} %>
-</div>
 <% end %>

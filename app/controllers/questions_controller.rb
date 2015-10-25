@@ -51,9 +51,12 @@ class QuestionsController < ApplicationController
   end
 
   def vote
-    vote = User.last.votes.new(value: params[:value], voteable_id: params[:id], voteable_type: params[:type])
-    if vote.save!
+    vote = current_user.votes.new(value: params[:value], voteable_id: params[:id], voteable_type: params[:type])
+    if vote.save
       redirect_to :back, notice: "Vote accepted."
+    elsif vote.has_voted?
+      vote.existing_vote.update(value: vote.value)
+      redirect_to :back, notice: "Vote updated."
     else
       redirect_to :back, alert: "Unable to vote on this."
     end

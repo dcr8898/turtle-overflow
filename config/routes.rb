@@ -3,12 +3,11 @@ Rails.application.routes.draw do
 
   get    'questions/unanswered', to: 'questions#unanswered'
 
-  resources :questions, only: [:index, :create, :new, :show] do
-    resources :answers, only: [:create] do
-      resources :comments, only: [:create]
-    end
-    resources :comments, only: [:create]
-  end
+  resources :questions, only: [:index, :create, :new, :show] 
+
+  resources :comments, only: [:create]
+  resources :answers, only: [:create]
+
 
   get    'login',  to: 'sessions#new'
   post   'login',  to: 'sessions#create'

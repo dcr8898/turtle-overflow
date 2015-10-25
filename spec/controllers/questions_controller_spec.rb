@@ -63,6 +63,44 @@ describe QuestionsController do
     end
   end
 
+  context "#edit" do
+    let!(:question) { FactoryGirl.create(:question) }
+    it "has a 200 status code" do
+      get :edit, id: question.id
+      expect(response.status).to eq(200)
+    end
+
+    it "renders the edit template" do
+      get :edit, id: question.id
+      expect(response).to render_template("edit")
+    end
+  end
+
+  context '#update' do
+    let!(:question) { FactoryGirl.create(:question) }
+    it 'updates question with valid parameters' do
+      expect {
+        patch :update, id: question.id, question: { body: 'test' }
+      }.to change { question.reload.body }.to('test')
+    end
+
+    it 'redirects after updating a question' do
+      patch :update, id: question.id, question: { body: 'test' }
+      expect(response).to redirect_to question_path(question.id)
+    end
+
+    it 'does not update a question if params invalid' do
+      expect {
+        patch :update, id: question.id, question: { body: nil }
+      }.not_to change { question.reload.body }
+    end
+
+    it 'does not redirect on invalid parameters' do
+      patch :update, id: question.id, question: { body: nil }
+      expect(response).to render_template('questions/edit')
+    end
+  end
+
   context "#show" do
     let(:question) { FactoryGirl.create :question}
     it "is successful" do

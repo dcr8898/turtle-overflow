@@ -12,4 +12,12 @@ class Question < ActiveRecord::Base
     order('votes_count DESC')
   }
 
+  def add_tags(tag_string)
+    return if (tag_string.nil? || tag_string.strip.empty?)
+    tag_array = tag_string.strip.split(", ").map {
+      |tag| Tag.where(text: tag).first_or_create
+    }
+    self.tags = tag_array
+  end
+
 end

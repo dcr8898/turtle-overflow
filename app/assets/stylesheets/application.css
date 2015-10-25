@@ -15,8 +15,3 @@
  *= require_tree .
  *= require_self
  */
-
-.user-links,
-.navigation-links {
-  text-align: right;
-}

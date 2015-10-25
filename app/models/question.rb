@@ -13,7 +13,7 @@ class Question < ActiveRecord::Base
   }
 
   def add_tags(tag_string)
-    return if (tag_string.nil? || tag_string.strip.empty?)
+    return if tag_string.nil?
     tag_array = tag_string.strip.split(", ").map {
       |tag| Tag.where(text: tag).first_or_create
     }

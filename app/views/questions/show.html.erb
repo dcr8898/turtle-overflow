@@ -39,10 +39,10 @@
 	<% @answers.each do |answer| %>
 		<%= render answer %>
 		<%= render answer.comments %>
-		<%= form_for @comment, url: question_answer_comments_path(@question, answer) do |f| %>
+		<%= form_for @comment, url: comments_path(answer_id: answer) do |f| %>
 		  <p>
 		    <%= f.label :Comment %><br>
-		    <%= f.text_area :body %>
+		    <%= f.text_area :body, class: 'u-full-width' %>
 		  </p>
 		 
 		  <p>
@@ -54,7 +54,7 @@
 <h5>Your Answer</h5>
 	<%= form_for @new_answer, url: answers_path(question_id: @question) do |f| %>
 	  <p>
-	    <%= f.label :Comment %><br>
+	    <%= f.label :Answer %><br>
 	    <%= f.text_area :body, class: 'u-full-width'%>
 	  </p>
 	 

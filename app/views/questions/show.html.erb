@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-	<div class="one column"><%= pluralize(@question.votes.count, "vote") %></div>
+	<div class="one column"><%= pluralize(@question.votes_count, "vote") %><%= link_to "up", vote_question_path(@question, type: "Question", value: 1), method: "post" %>  <%= link_to "down", vote_question_path(@question, type: "Question", value: -1), method: "post" %></div>
 	<div class="eleven columns"><%= @question.body %>
 		<%= render @question.tags %>
 		asked <%= @question.created_at %> <%= link_to @question.user.username %>
@@ -22,10 +22,6 @@
   </p>
 <% end %>
 
-<% if flash[:error] %>
-	<%= flash[:error] %>
-<% end %>
-
 <div class="row">
 <h5><%= pluralize(@question.answers.count, "Answer") %></h5>
 </div>
@@ -33,6 +29,16 @@
 <% if @answer %>
 	<%= render @answer %>		
 	<%= render @answer.comments %>
+	<%= form_for @comment, url: comments_path(answer_id: @answer) do |f| %>
+	  <p>
+	    <%= f.label :Comment %><br>
+	    <%= f.text_area :body, class: 'u-full-width' %>
+	  </p>
+	 
+	  <p>
+	    <%= f.submit %>
+	  </p>
+	<% end %>
 <% end %>
 
 <% if @answers %>

@@ -36,6 +36,7 @@ FactoryGirl.define do
   end
 
   factory :vote do
+    value [1, -1].sample
     association :user
     association :voteable, factory: :question
 

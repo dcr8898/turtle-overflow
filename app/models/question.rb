@@ -30,5 +30,6 @@ class Question < ActiveRecord::Base
     else
       self.answers
     end
+  end
 
 end

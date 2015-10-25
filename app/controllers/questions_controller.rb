@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
       redirect_to @question
     else
       flash.now.alert = @question.errors.full_messages.join(', ')
-      render new_question_path
+      render 'questions/new'
     end
   end
 
@@ -27,6 +27,22 @@ class QuestionsController < ApplicationController
     @answers = @question.unchosen_answers
     @comment = Comment.new
     @new_answer = Answer.new
+  end
+
+  def edit
+    @question = Question.find_by(id: params[:id])
+  end
+
+  def update
+    tags_text = params[:question].delete('tags_text')
+    @question = Question.find_by(id: params[:id])
+    if @question.update(question_params)
+      @question.add_tags(tags_text)
+      redirect_to @question
+    else
+      flash.now.alert = @question.errors.full_messages.join(', ')
+      render 'questions/edit'
+    end
   end
 
   def unanswered

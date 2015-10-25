@@ -13,16 +13,20 @@ class Question < ActiveRecord::Base
   }
 
   def add_tags(tag_string)
-    return if (tag_string.nil? || tag_string.strip.empty?)
+    tag_string = "" if tag_string.nil?
     tag_array = tag_string.strip.split(", ").map {
       |tag| Tag.where(text: tag).first_or_create
     }
     self.tags = tag_array
   end
 
+  def tags_text
+    self.tags.tags_text
+  end
+
   def unchosen_answers
     if self.answer
-      self.answers.where.not(id: self.answer.id).order('votes_count desc')  
+      self.answers.where.not(id: self.answer.id).order('votes_count desc')
     else
       self.answers
     end

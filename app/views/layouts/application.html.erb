@@ -9,11 +9,17 @@
 <header class='container'>
   <div class='row'>
     <div class='one-third column'>
-      <h1>turtle overflow</h1>
+      <h1><%= link_to 'turtle overflow', root_path %></h1>
     </div>
     <div class='two-thirds column'>
       <div class='user-links'>
-        user links
+        <% if logged_in? %>
+          <%= link_to current_user.username, current_user %> |
+          <%= link_to 'logout', logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign up", '#' %> |
+          <%= link_to "Log in", login_path %>
+        <% end %>
       </div>
       <div class="navigation-links">
         <%= link_to "Questions", questions_path, class: 'button' %>

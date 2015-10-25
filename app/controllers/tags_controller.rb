@@ -1,4 +1,4 @@
-class TagsController < ActionController::Base
+class TagsController < ApplicationController
   def index
     @tags = Tag.all.order(:text)
   end

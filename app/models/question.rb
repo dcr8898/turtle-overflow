@@ -20,12 +20,15 @@ class Question < ActiveRecord::Base
     self.tags = tag_array
   end
 
+  def tags_text
+    self.tags.tags_text
+  end
+
   def unchosen_answers
     if self.answer
-      self.answers.where.not(id: self.answer.id).order('votes_count desc')  
+      self.answers.where.not(id: self.answer.id).order('votes_count desc')
     else
       self.answers
     end
-  end
 
 end

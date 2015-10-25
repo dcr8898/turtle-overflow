@@ -16,5 +16,5 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:index, :show]
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :new, :create]
 end

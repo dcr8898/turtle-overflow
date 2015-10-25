@@ -1,0 +1,16 @@
+<h4>Edit your question</h4>
+<%= form_for(:question, url: questions_path) do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'u-full-width' %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body, size: '80x12', class: 'u-full-width' %>
+  </div>
+  <div>
+    <%= f.label :tags_text, "Tags (comma separated: example, 'ruby, rails')" %>
+    <%= f.text_field :tags_text, class: 'u-full-width' %>
+  </div>
+  <%= f.submit "Update question", class: 'button-primary' %>
+<% end %>

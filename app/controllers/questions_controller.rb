@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find_by(id: params[:id])
-    render text: @question.tags_text
   end
 
   def update

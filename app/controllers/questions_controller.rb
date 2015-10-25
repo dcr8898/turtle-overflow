@@ -29,6 +29,24 @@ class QuestionsController < ApplicationController
     @new_answer = Answer.new
   end
 
+  def edit
+    @question = Question.find_by(id: params[:id])
+    render text: @question.tags_text
+  end
+
+  def update
+    # tags_text = params[:question].delete('tags_text')
+    # @question = Question.new(question_params)
+    # @question.user = current_user
+    # if @question.save
+    #   @question.add_tags(tags_text)
+    #   redirect_to @question
+    # else
+    #   flash.now.alert = @question.errors.full_messages.join(', ')
+    #   render new_question_path
+    # end
+  end
+
   def unanswered
     @questions = Question.where("answer_id is ?", nil)
     render 'index'

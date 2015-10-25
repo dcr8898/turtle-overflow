@@ -27,6 +27,18 @@ describe QuestionsController do
     end
   end
 
+  context "#new" do
+    it "has a 200 status code" do
+      get :new
+      expect(response.status).to eq(200)
+    end
+
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template("new")
+    end
+  end
+
   context '#create' do
     it 'creates a question from valid parameters' do
       expect {

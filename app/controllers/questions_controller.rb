@@ -12,8 +12,8 @@ class QuestionsController < ApplicationController
     tags_text = params[:question].delete('tags_text')
     @question = Question.new(question_params)
     @question.user = current_user
-    @question.add_tags(tags_text)
     if @question.save
+      @question.add_tags(tags_text)
       redirect_to @question
     else
       flash.now.alert = @question.errors.full_messages.join(', ')

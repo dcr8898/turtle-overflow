@@ -6,9 +6,6 @@ describe QuestionsController do
   let(:valid_attrs) { FactoryGirl.build(:question).attributes }
   let(:invalid_attrs) { FactoryGirl.build(:question, body: nil).attributes }
 
-  before(:each) do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-  end
 
   context "#index" do
     it "is successful" do
@@ -40,6 +37,10 @@ describe QuestionsController do
   end
 
   context '#create' do
+    before(:each) do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    end
+
     it 'creates a question from valid parameters' do
       expect {
         post :create, { question: valid_attrs }
@@ -124,6 +125,47 @@ describe QuestionsController do
     it "assigns @questions to have answer_id as nil" do
       get :unanswered, :id => question.id
       expect(assigns(:questions)).to eq Question.where("answer_id is ?", nil)
+    end
+  end
+
+  context "#destroy" do
+    let(:question) { FactoryGirl.create(:question) }
+
+
+    context "user is owner of question" do
+      subject { delete :destroy, {id: question.id}, {user_id: question.user.id} }
+
+      it "should redirect to root path" do
+        subject.should redirect_to root_path
+      end
+
+      it "should set a flash notice" do
+        subject
+        expect(flash[:notice]).to eq("You've successfully deleted #{question.title}")
+      end
+
+      it "deletes the question" do
+        question #create question in database
+        expect{subject}.to change{ Question.count }.by(-1)
+      end
+    end
+
+    context "user is not owner of the question" do
+      subject { delete :destroy, {id: question.id}, {user_id: nil} }
+
+      it "should redirect back to the question" do
+        subject.should redirect_to question_path(question)
+      end
+
+      it "should set a flash notice" do
+        subject
+        expect(flash[:error]).to eq("Delete failed. You are not the owner of this question.")
+      end
+
+      it "should not change the number of questions" do
+        question #create question in database
+        expect{subject}.not_to change{Question.count}
+      end
     end
   end
 end

@@ -24,4 +24,10 @@ class QuestionsController < ApplicationController
     render 'index'
   end
 
+  private
+
+  def question_params
+    params.require(:question).permit(:body, :tags)
+  end
+
 end

@@ -20,4 +20,8 @@ class Question < ActiveRecord::Base
     self.tags = tag_array
   end
 
+  def unchosen_answers
+    self.answers.order('votes_count desc').select { |ans| ans != self.answer }
+  end
+
 end

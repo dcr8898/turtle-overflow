@@ -33,15 +33,22 @@ describe Question do
         question.add_tags('test1, test2')
       }.to change { Tag.count }.by(2)
     end
-    it "does not process empty string" do
-      expect {
-        question.add_tags('')
-      }.not_to change { Tag.count }
+    it "clears question's tag collection when passed empty string" do
+      question.add_tags('test1, test2')
+      question.add_tags('')
+      expect(question.tags).to be_empty
     end
-    it "does not process nil value" do
-      expect {
-        question.add_tags(nil)
-      }.not_to change { Tag.count }
+    it "clears question's tag collection when passed nil" do
+      question.add_tags('test1, test2')
+      question.add_tags(nil)
+      expect(question.tags).to be_empty
+    end
+  end
+
+  context "#tags_text" do
+    it "returns the value of question.tags.tags_text" do
+      question.add_tags('test1, test2')
+      expect(question.tags_text).to eq(question.tags.tags_text)
     end
   end
 

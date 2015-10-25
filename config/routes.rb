@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get    'questions/unanswered', to: 'questions#unanswered'
 
-  resources :questions, only: [:index, :create, :new, :show, :destroy] do
+  resources :questions do
     resources :answers, only: [:create] do
       resources :comments, only: [:create]
     end

@@ -7,29 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <header class='container'>
-  <h1>Turtle Overflow</h1>
-</header>
-<body>
-  <div class='container'>
-    <div class="row">
-      <div class="two columns">
+  <div class='row'>
+    <div class='one-third column'>
+      <h1><%= link_to 'turtle overflow', root_path %></h1>
+    </div>
+    <div class='two-thirds column'>
+      <div class='user-links'>
+        <% if logged_in? %>
+          <%= link_to current_user.username, current_user %> |
+          <%= link_to 'logout', logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign up", '#' %> |
+          <%= link_to "Log in", login_path %>
+        <% end %>
       </div>
       <div class="navigation-links">
-        <div class="two columns">
-          <%= link_to "Questions", questions_path %>
-        </div>
-        <div class="two columns">
-          <%= link_to "Users", "#" %>
-        </div>
-        <div class="two columns">
-          <%= link_to "Unanswered Questions", "questions/unanswered" %>
-        </div>
-        <div class="two columns">
-          <%= link_to "Ask a Question", "#" %>
-        </div>
+        <%= link_to "Questions", questions_path, class: 'button' %>
+        <%= link_to "Users", "#", class: 'button' %>
+        <%= link_to "Unanswered Questions", "questions/unanswered", class: 'button' %>
+        <%= link_to "Ask a Question", "#", class: 'button' %>
       </div>
     </div>
   </div>
+</header>
+<body>
   <div class='container'>
     <% if flash.any?  %>
       <div id="flash">

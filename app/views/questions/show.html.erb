@@ -35,18 +35,20 @@
 	<%= render @answer.comments %>
 <% end %>
 
-<% @answers.each do |answer| %>
-	<%= render answer %>
-	<%= render answer.comments %>
-	<%= form_for @comment, url: comments_path(answer_id: answer) do |f| %>
-	  <p>
-	    <%= f.label :Comment %><br>
-	    <%= f.text_area :body, class: 'u-full-width'%>
-	  </p>
-	 
-	  <p>
-	    <%= f.submit %>
-	  </p>
+<% if @answers %>
+	<% @answers.each do |answer| %>
+		<%= render answer %>
+		<%= render answer.comments %>
+		<%= form_for @comment, url: question_answer_comments_path(@question, answer) do |f| %>
+		  <p>
+		    <%= f.label :Comment %><br>
+		    <%= f.text_area :body %>
+		  </p>
+		 
+		  <p>
+		    <%= f.submit %>
+		  </p>
+		<% end %>
 	<% end %>
 <% end %>
 <h5>Your Answer</h5>

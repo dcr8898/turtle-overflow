@@ -12,7 +12,7 @@
 <hr>
 <div class="answers">
   <% @user_answers.each do |answer| %>
-    <%= render partial: '/answers/answer', locals: { answer: answer } %>
+    <%= render partial: 'answer', locals: { answer: answer } %>
   <% end %>
 </div>
 

@@ -1,4 +1,7 @@
 class QuestionsController < ApplicationController
+  before_action :logged_in_user, except: [:index, :show, :unanswered]
+
+  before_action :verify_ownership, only: [:update, :destroy]
 
   def index
     @questions = Question.most_voted
@@ -74,5 +77,21 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:notice] = "Please log in."
+      redirect_to login_path
+    end
+  end
+
+  def verify_ownership
+    question = Question.find_by(id: params[:id])
+
+    unless question.user == current_user
+      flash[:notice] = "Action failed. You are not the owner of this question."
+      redirect_to question
+    end
   end
 end

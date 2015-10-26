@@ -24,6 +24,14 @@ describe Question do
     end
   end
 
+  it 'should return the answer which has not been selected' do
+    question = FactoryGirl.build :question
+    ans = FactoryGirl.create(:answer, question: question)
+    expect(question.unchosen_answers).to eq(question.answers)
+    answered_question = FactoryGirl.build :answered_question
+    expect(answered_question.unchosen_answers).to be_empty
+  end
+
   it "question should be unanswered by default" do
     expect (question.answer).should be_nil
   end

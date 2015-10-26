@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
 
     unless question.user == current_user
       flash[:notice] = "Action failed. You are not the owner of this question."
-      redirect_to question
+      redirect_to question_path(question)
     end
   end
 end

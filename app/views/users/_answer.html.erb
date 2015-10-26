@@ -1,0 +1,32 @@
+<div class="row answer">
+	<div class="one column center-align">
+    <div>
+      <%= link_to "▲", vote_question_path(answer, type: "Answer", value: 1), method: "post" %>
+    </div>
+    <div>
+      <%= answer.votes_count %>
+    </div>
+    <div>
+      <%= link_to "▼", vote_question_path(answer, type: "Answer", value: -1), method: "post" %>
+    </div>
+  </div>
+  <div class="eleven columns">
+    <article id="<%= answer.id %>">
+      <div>
+        <%= answer.body %>
+      </div>
+      <div class='right-align'>
+        Answer by <%= link_to answer.user.username %>
+          <% if answer.created_at == answer.updated_at %>
+            <%= short_date(answer.created_at) %>
+          <% else %>
+            <%= short_date(answer.updated_at) %>
+          <%end %>
+      </div>
+      <div>
+        In response to: <%= link_to answer.question.title, question_path(answer.question) %>
+      </div>
+    </article>
+  </div>
+</div>
+<hr>

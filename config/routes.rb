@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get    'logout', to: 'sessions#destroy'
   delete 'logout', to: 'sessions#destroy'
 
-  resources :questions, except: [:delete]
+  resources :questions, except: [:delete] do
+    post 'vote', on: :member
+  end
 
   resources :comments, only: [:create]
 

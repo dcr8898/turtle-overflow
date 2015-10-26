@@ -1,5 +1,5 @@
 <div class="row question">
-  <div class="one column"><%= pluralize(question.votes_count, "vote") %></div>
+  <div class="one column"><%= pluralize(question.votes_count, "vote") %> <%= link_to "up", vote_question_path(question, type: "Question", value: 1), method: "post" %>  <%= link_to "down", vote_question_path(question, type: "Question", value: -1), method: "post" %></div>
   <div class="one column"><%= pluralize(question.answers.count, "answer") %></div>
   <div class="ten columns"><%= link_to question.title, question_path(question) %>
     <%= render question.tags %> asked <%= question.created_at %> <%= link_to question.user.username %>

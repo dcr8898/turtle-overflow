@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get    'logout', to: 'sessions#destroy'
   delete 'logout', to: 'sessions#destroy'
 
+  get    'register',  to: 'users#new'
+
   resources :questions, except: [:delete] do
     post 'vote', on: :member
   end
@@ -20,5 +22,4 @@ Rails.application.routes.draw do
   resources :tags, only: [:index, :show]
 
   resources :users, only: [:show, :new, :create]
-
 end

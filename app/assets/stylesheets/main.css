@@ -7,3 +7,17 @@
 .center-align {
   text-align: center;
 }
+
+.tag-columns  {
+  -webkit-column-count: 6;
+  -moz-column-count: 6;
+  column-count: 6;
+
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+
+  -webkit-column-rule: 2px inset #000;
+  -moz-column-rule: 2px inset #000;
+  column-rule: 2px inset #000;
+}

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 describe CommentsController do
 
@@ -23,8 +24,13 @@ describe CommentsController do
     end
 
     it 'redirects after creating a message' do
-      post :create, {comment:  valid_attrs, question_id: valid_attrs["commentable_id"] }
-      expect(response).to redirect_to question_path(valid_attrs["commentable_id"], anchor: valid_attrs["commentable_id"])
+      if valid_attrs["commentable_type"] == "Question"
+        post :create, { comment: valid_attrs, question_id: valid_attrs["commentable_id"] }
+        expect(response).to redirect_to question_path(valid_attrs["commentable_id"], anchor: Comment.last.id)
+      else
+        post :create, { comment: valid_attrs, answer_id: valid_attrs["commentable_id"] }
+        expect(response).to redirect_to question_path(valid_attrs["commentable_id"], anchor: Comment.last.id)
+      end
     end
 
     it 'does not redirect on invalid parameters' do

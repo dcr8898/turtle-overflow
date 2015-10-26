@@ -6,8 +6,8 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<header class='container'>
-  <div class='row'>
+<header>
+  <div class='container row'>
     <div class='one-third column'>
       <h1><%= link_to 'turtle overflow', root_path %></h1>
     </div>
@@ -23,7 +23,7 @@
       </div>
       <div class="navigation-links">
         <%= link_to "Questions", questions_path, class: 'button' %>
-        <%= link_to "Users", "#", class: 'button' %>
+        <%= link_to "Tags", tags_path, class: 'button' %>
         <%= link_to "Unanswered Questions", "questions/unanswered", class: 'button' %>
         <%= link_to "Ask a Question", new_question_path, class: 'button' %>
       </div>

@@ -1,5 +1,29 @@
 <div class="row comment">
-	<div class="one column"></div>
-	<div class="one column"><%= comment.votes_count %><%= link_to "up", vote_question_path(comment, type: "Comment", value: 1), method: "post" %>  <%= link_to "down", vote_question_path(comment, type: "Comment", value: -1), method: "post" %></div>
-	<div class="ten columns"><article id="<%= comment.id %>"><%= comment.body %> - <%= link_to comment.user.username %> <%= comment.updated_at %></article></div>
+	<div class="offset-by-one one column center-align">
+    <div>
+      <%= link_to "▲", vote_question_path(comment, type: "Comment", value: 1), method: "post" %>
+    </div>
+    <div>
+      <%= comment.votes_count %>
+    </div>
+    <div>
+      <%= link_to "▼", vote_question_path(comment, type: "Comment", value: -1), method: "post" %>
+    </div>
+  </div>
+	<div class="ten columns">
+    <article id="<%= comment.id %>">
+      <div>
+        <%= comment.body %>
+      </div>
+      <div class='right-align'>
+        Comment by <%=  link_to comment.user.username %>
+        <% if comment.created_at == comment.updated_at %>
+          <%= "created on #{short_date(comment.created_at.localtime)}" %>
+        <% else %>
+          <%= "updated on #{short_date(comment.updated_at.localtime)}" %>
+        <% end %>
+      </div>
+    </article>
+    <hr>
+  </div>
 </div>

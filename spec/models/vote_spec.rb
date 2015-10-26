@@ -8,8 +8,8 @@ describe Vote do
   end
 
   context "associations" do
-    it { should belong_to :user }  
-    it { should belong_to :voteable }  
+    it { should belong_to :user }
+    it { should belong_to :voteable }
     it "has many posts" do
       expect {
         vote = FactoryGirl.build :vote
@@ -18,14 +18,14 @@ describe Vote do
     end
   end
 
-  context "total_votes" do
+  context "#total_votes" do
     it 'should return the total votes on its voteable' do
       vote = FactoryGirl.build :vote
       expect(vote.total_votes).to eq(vote.voteable.votes.sum(:value))
     end
   end
 
-  context "update_vote_count" do
+  context "#update_vote_count" do
     it 'should not change number in Vote table' do
       vote = FactoryGirl.build :vote
       vote.save
@@ -33,12 +33,20 @@ describe Vote do
     end
   end
 
-  context "has_voted?" do
+  context "#has_voted?" do
     it 'should return false if user has already voted on voteable' do
       vote = FactoryGirl.build :vote
       expect(vote.has_voted?).to be false
       vote.save
       expect(vote.has_voted?).to be true
+    end
+  end
+
+  context "#existing_vote" do
+    it 'should return existing vote if user has already voted on voteable' do
+      vote = FactoryGirl.build :vote
+      vote.save
+      expect(vote.existing_vote).to eq(vote)
     end
   end
 end

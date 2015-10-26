@@ -20,7 +20,7 @@
         <%= render question.tags %>&nbsp;
       </div>
       <div class='one-half column right-align'>
-        <%= link_to question.user.username %>
+        <%= link_to question.user.username, question.user %>
         <% if question.created_at == question.updated_at %>
           asked on <%= short_date(question.created_at.localtime) %>
         <% else %>

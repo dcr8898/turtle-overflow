@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 describe CommentsController do
 
@@ -7,6 +8,8 @@ describe CommentsController do
   let(:qc_invalid_attrs){ FactoryGirl.build(:comment, body:nil ).attributes }
   let(:ac_valid_attrs) { FactoryGirl.build(:answer_comment).attributes }
   let(:ac_invalid_attrs){ FactoryGirl.build(:answer_comment, body:nil ).attributes }
+  let!(:comment) { FactoryGirl.create(:comment, user_id: user.id) }
+  let!(:answer_comment) { FactoryGirl.create(:answer_comment, user_id: user.id) }
 
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -65,5 +68,49 @@ describe CommentsController do
     end
 
   end
+
+  context "#edit" do
+    let!(:comment) { FactoryGirl.create(:comment) }
+    it "has a 200 status code" do
+      get :edit, id: comment.id
+      expect(response.status).to eq(200)
+    end
+
+    it "renders the edit template" do
+      get :edit, id: comment.id
+      expect(response).to render_template("edit")
+    end
+  end
+
+  context '#update' do
+
+    it 'updates comment with valid parameters' do
+      expect {
+        patch :update, id: comment.id, comment: { body: 'test' }
+      }.to change { comment.reload.body }.to('test')
+    end
+
+    it 'redirects after updating a question comment' do
+      patch :update, id: comment.id, comment: { body: 'test' }
+      expect(response).to redirect_to question_path(comment.commentable, anchor: comment.id)
+    end
+
+    it 'redirects after updating a answer comment' do
+      patch :update, id: answer_comment.id, comment: { body: 'test' }
+      expect(response).to redirect_to question_path(answer_comment.commentable.question_id, anchor: Comment.last.id)
+    end
+
+    it 'does not update a comment if params invalid' do
+      expect {
+        patch :update, id: comment.id, comment: { body: nil }
+      }.not_to change { comment.reload.body }
+    end
+
+    it 'does not redirect on invalid parameters' do
+      patch :update, id: comment.id, comment: { body: nil }
+      expect(response).to render_template('comments/edit')
+    end
+  end
+
 
 end

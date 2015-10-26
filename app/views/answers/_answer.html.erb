@@ -1,4 +1,29 @@
 <div class="row answer">
-	<div class="one column"><%= answer.votes_count %><%= link_to "up", vote_question_path(answer, type: "Answer", value: 1), method: "post" %>  <%= link_to "down", vote_question_path(answer, type: "Answer", value: -1), method: "post" %></div>
-	<div class="eleven columns"><article id="<%= answer.id %>"><%= answer.body %> answered <%= answer.created_at %> <%= link_to answer.user.username %></article></div>
+	<div class="one column center-align">
+    <div>
+      <%= link_to "▲", vote_question_path(answer, type: "Answer", value: 1), method: "post" %>
+    </div>
+    <div>
+      <%= answer.votes_count %>
+    </div>
+    <div>
+      <%= link_to "▼", vote_question_path(answer, type: "Answer", value: -1), method: "post" %>
+    </div>
+  </div>
+  <div class="eleven columns">
+    <article id="<%= answer.id %>">
+      <div>
+        <%= answer.body %>
+      </div>
+      <div class='right-align'>
+        answer by <%= link_to answer.user.username %>
+          <% if answer.created_at == answer.updated_at %>
+            <%= short_date(answer.created_at) %>
+          <% else %>
+            <%= short_date(answer.updated_at) %>
+          <%end %>
+      </div>
+    </article>
+  </div>
 </div>
+<hr>

@@ -1,73 +1,110 @@
 <div id="question-header">
 	<h4><%= @question.title %></h4>
-  <% if current_user == @question.user %>
-    <%= link_to "Delete Question", @question, method: :delete, class: "button" %>
-  <% end %>
 </div>
-
 <div class="row">
-	<div class="one column"><%= pluralize(@question.votes_count, "vote") %><%= link_to "up", vote_question_path(@question, type: "Question", value: 1), method: "post" %>  <%= link_to "down", vote_question_path(@question, type: "Question", value: -1), method: "post" %></div>
-	<div class="eleven columns"><%= @question.body %>
-		<%= render @question.tags %>
-		asked <%= @question.created_at %> <%= link_to @question.user.username %>
+	<div class="one column center-align">
+		<div>
+			<%= link_to "▲", vote_question_path(@question, type: "Question", value: 1), method: "post" %>
+		</div>
+		<div>
+			<%= @question.votes_count %>
+		</div>
+		<div>
+			<%= link_to "▼", vote_question_path(@question, type: "Question", value: -1), method: "post" %>
+		</div>
+	</div>
+	<div class="eleven columns">
+		<%= @question.body %>
+    <div class='row'>
+      <div class='one-half column'>
+        <%= render @question.tags %>&nbsp;
+      </div>
+      <div class='one-half column right-align'>
+        Question by <%= link_to @question.user.username %>
+        <% if @question.created_at == @question.updated_at %>
+          asked on <%= short_date(@question.created_at.localtime) %>
+        <% else %>
+          updated on <%= short_date(@question.updated_at.localtime) %>
+        <% end %>
+			  <% if current_user == @question.user %>
+			    <%= link_to "Delete Question", @question, method: :delete %>
+			  <% end %>
+      </div>
+    </div>
+	</div>
+</div>
+<hr>
+<div class='row'>
+	<div class='ten columns offset-by-two'>
+		<h6><%= pluralize(@question.comments.count, "Comment") %></h6>
 	</div>
 </div>
 <%= render @question.comments %>
-
-<%= form_for @comment, url: comments_path(question_id: @question) do |f| %>
-  <p>
-    <%= f.label :Comment %><br>
-    <%= f.text_area :body, class: 'u-full-width'%>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<div class="row">
-<h5><%= pluralize(@question.answers.count, "Answer") %></h5>
+<div class='row'>
+	<div class='ten columns offset-by-two'>
+		<%= form_for @comment, url: comments_path(question_id: @question) do |f| %>
+		  <p>
+		    <%= f.label :Comment %><br>
+		    <%= f.text_area :body, class: 'u-full-width'%>
+		  </p>
+		  <p>
+		    <%= f.submit class: 'button-primary' %>
+		  </p>
+		<% end %>
+	</div>
 </div>
-
+<div >
+	<h5><%= pluralize(@question.answers.count, "Answer") %></h5>
+</div>
 <% if @answer %>
-	<%= render @answer %>		
+	<%= render @answer %>
+	<div class='row'>
+		<div class='ten columns offset-by-two'>
+			<h6><%= pluralize(@answer.comments.count, "Comment") %></h6>
+		</div>
+	</div>
 	<%= render @answer.comments %>
 	<%= form_for @comment, url: comments_path(answer_id: @answer) do |f| %>
 	  <p>
 	    <%= f.label :Comment %><br>
 	    <%= f.text_area :body, class: 'u-full-width' %>
 	  </p>
-	 
 	  <p>
-	    <%= f.submit %>
+	    <%= f.submit class: 'button-primary' %>
 	  </p>
 	<% end %>
 <% end %>
-
 <% if @answers %>
 	<% @answers.each do |answer| %>
 		<%= render answer %>
+		<div class='row'>
+			<div class='ten columns offset-by-two'>
+				<h6><%= pluralize(answer.comments.count, "Comment") %></h6>
+			</div>
+		</div>
 		<%= render answer.comments %>
-		<%= form_for @comment, url: comments_path(answer_id: answer) do |f| %>
-		  <p>
-		    <%= f.label :Comment %><br>
-		    <%= f.text_area :body, class: 'u-full-width' %>
-		  </p>
-		 
-		  <p>
-		    <%= f.submit %>
-		  </p>
-		<% end %>
+		<div class='row'>
+			<div class='ten columns offset-by-two'>
+				<%= form_for @comment, url: comments_path(answer_id: answer) do |f| %>
+				  <p>
+				    <%= f.label :Comment %><br>
+				    <%= f.text_area :body, class: 'u-full-width' %>
+				  </p>
+				  <p>
+				    <%= f.submit class: 'button-primary' %>
+				  </p>
+				<% end %>
+			</div>
+		</div>
 	<% end %>
 <% end %>
 <h5>Your Answer</h5>
-	<%= form_for @new_answer, url: answers_path(question_id: @question) do |f| %>
-	  <p>
-	    <%= f.label :Answer %><br>
-	    <%= f.text_area :body, class: 'u-full-width'%>
-	  </p>
-	 
-	  <p>
-	    <%= f.submit %>
-	  </p>
-	<% end %>
+<%= form_for @new_answer, url: answers_path(question_id: @question) do |f| %>
+  <p>
+    <%= f.label :Answer %><br>
+    <%= f.text_area :body, class: 'u-full-width'%>
+  </p>
+  <p>
+    <%= f.submit class: 'button-primary' %>
+  </p>
+<% end %>

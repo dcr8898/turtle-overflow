@@ -1,0 +1,9 @@
+<%= form_for @comment do |f| %>
+  <div>
+    <%= f.label :Comment %><br>
+    <%= f.text_area :body, class: 'u-full-width' %>
+  </div>
+  <div>
+    <%= f.submit class: 'button-primary' %>
+  </div>
+<% end %>

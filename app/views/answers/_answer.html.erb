@@ -16,7 +16,7 @@
         <%= answer.body %>
       </div>
       <div class='right-align'>
-        answer by <%= link_to answer.user.username %>
+        Answer by <%= link_to answer.user.username %>
           <% if answer.created_at == answer.updated_at %>
             <%= short_date(answer.created_at) %>
           <% else %>

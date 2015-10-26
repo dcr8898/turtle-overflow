@@ -1,22 +1,25 @@
-<h2>Showing User Profile for <%= @user.username %></h2>
+<h4>Profile for <%= @user.username %></h4>
 
-<h3>Questions by this User</h3>
+<h5><%= pluralize(@user_questions.count, 'Questions') %> by this User</h5>
+<hr>
 <div class="questions">
   <% @user_questions.each do |question| %>
-    <%= render partial: '/questions/question', locals: {question: question} %>
+    <%= render partial: '/questions/question', locals: { question: question } %>
   <% end %>
 </div>
 
-<h3>Answers by this User</h3>
+<h5><%= pluralize(@user_answers.count, 'Answers') %> by this User</h5>
+<hr>
 <div class="answers">
   <% @user_answers.each do |answer| %>
-    <%= render partial: '/answers/answer', locals: {answer: answer} %>
+    <%= render partial: '/answers/answer', locals: { answer: answer } %>
   <% end %>
 </div>
 
-<h3>Comments by this User</h3>
+<h5><%= pluralize(@user_comments.count, 'Comments') %> by this User</h5>
+<hr>
 <div class="comments">
   <% @user_comments.each do |comment| %>
-    <%= render partial: '/comments/comment', locals: {comment: comment} %>
+    <%= render partial: '/comments/comment', locals: { comment: comment } %>
   <% end %>
 </div>

@@ -16,7 +16,7 @@
         <%= comment.body %>
       </div>
       <div class='right-align'>
-        comment by <%=  link_to comment.user.username %>
+        Comment by <%=  link_to comment.user.username %>
         <% if comment.created_at == comment.updated_at %>
           <%= "created on #{short_date(comment.created_at.localtime)}" %>
         <% else %>

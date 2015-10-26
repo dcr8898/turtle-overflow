@@ -53,6 +53,7 @@
 		<% end %>
 	</div>
 </div>
+<hr>
 <div >
 	<h5><%= pluralize(@question.answers.count, "Answer") %></h5>
 </div>
@@ -73,6 +74,7 @@
 	    <%= f.submit class: 'button-primary' %>
 	  </p>
 	<% end %>
+	<hr>
 <% end %>
 <% if @answers %>
 	<% @answers.each do |answer| %>
@@ -96,6 +98,7 @@
 				<% end %>
 			</div>
 		</div>
+		<hr>
 	<% end %>
 <% end %>
 <h5>Your Answer</h5>

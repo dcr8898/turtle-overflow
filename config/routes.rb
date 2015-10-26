@@ -4,13 +4,6 @@ Rails.application.routes.draw do
 
   get    'questions/unanswered', to: 'questions#unanswered'
 
-  resources :questions do
-    resources :answers, only: [:create] do
-      resources :comments, only: [:create]
-    end
-    resources :comments, only: [:create]
-  end
-
   get    'login',  to: 'sessions#new'
   post   'login',  to: 'sessions#create'
   get    'logout', to: 'sessions#destroy'
@@ -22,7 +15,7 @@ Rails.application.routes.draw do
     post 'vote', on: :member
   end
 
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :edit, :update]
 
   resources :answers, only: [:create]
 

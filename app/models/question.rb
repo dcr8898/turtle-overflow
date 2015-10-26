@@ -28,7 +28,7 @@ class Question < ActiveRecord::Base
     if self.answer
       self.answers.where.not(id: self.answer.id).order('votes_count desc')
     else
-      self.answers
+      self.answers.order('votes_count desc')
     end
   end
 

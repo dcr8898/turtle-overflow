@@ -9,6 +9,11 @@
     <div>
       <%= link_to "▼", vote_question_path(answer, type: "Answer", value: -1), method: "post" %>
     </div>
+    <% if answer.question.answer %>
+    <div>
+      &#10004;
+    </div>
+    <% end %>
   </div>
   <div class="eleven columns">
     <article id="<%= answer.id %>">

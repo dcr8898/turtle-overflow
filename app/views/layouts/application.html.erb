@@ -35,9 +35,7 @@
     <% if flash.any?  %>
       <div id="flash">
         <% flash.each do |type, message| %>
-          <div class="<%= type %> ">
-            <%= message %>
-          </div>
+          <%= content_tag :div, message, class: type %>
         <% end %>
       </div>
     <% end %>

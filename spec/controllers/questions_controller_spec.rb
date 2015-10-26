@@ -5,10 +5,12 @@ describe QuestionsController do
   let(:user) { FactoryGirl.create(:user) }
   let(:valid_attrs) { FactoryGirl.build(:question).attributes }
   let(:invalid_attrs) { FactoryGirl.build(:question, body: nil).attributes }
+  let!(:question) { FactoryGirl.create(:question, user_id: user.id) }
 
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
   end
+
 
   context "#index" do
     it "is successful" do
@@ -40,6 +42,7 @@ describe QuestionsController do
   end
 
   context '#create' do
+
     it 'creates a question from valid parameters' do
       expect {
         post :create, { question: valid_attrs }
@@ -77,7 +80,7 @@ describe QuestionsController do
   end
 
   context '#update' do
-    let!(:question) { FactoryGirl.create(:question) }
+
     it 'updates question with valid parameters' do
       expect {
         patch :update, id: question.id, question: { body: 'test' }
@@ -124,6 +127,27 @@ describe QuestionsController do
     it "assigns @questions to have answer_id as nil" do
       get :unanswered, :id => question.id
       expect(assigns(:questions)).to eq Question.where("answer_id is ?", nil)
+    end
+  end
+
+  context "#destroy" do
+
+    context "user is owner of question" do
+      subject { delete :destroy, {id: question.id} }
+
+      it "should redirect to root path" do
+        subject.should redirect_to root_path
+      end
+
+      it "should set a flash notice" do
+        subject
+        expect(flash[:notice]).to eq("You've successfully deleted #{question.title}")
+      end
+
+      it "deletes the question" do
+        question #create question in database
+        expect{subject}.to change{ Question.count }.by(-1)
+      end
     end
   end
 end

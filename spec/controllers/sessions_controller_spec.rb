@@ -42,14 +42,9 @@ describe SessionsController do
         subject.should render_template("new")
       end
 
-      it "assigns @errors" do
+      it "assigns flash message" do
         subject
-        expect(assigns(:errors)).to be_a Array
-      end
-
-      it "should not divulge too much information" do
-        subject
-        expect(assigns(:errors).length).to eq(1)
+        expect(flash.now[:alert]).not_to be_nil
       end
     end
   end

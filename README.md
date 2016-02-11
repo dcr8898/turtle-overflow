@@ -1,6 +1,9 @@
 ##Turtle Overflow
 
-Turtle Overflow is a clone of the popular Stack Overflow site.  It was built as a learning exercise by [Steven Leiva](https://github.com/stevenxl), [Peter Rosal](https://github.com/r05al), and [Damian Rossney](https://github.com/dcr8898).
+Turtle Overflow is a tribute to the popular Stack Overflow site.  It was built as a learning exercise by:
+* [Steven Leiva](https://github.com/stevenxl),
+* [Peter Rosal](https://github.com/r05al), and
+* [Damian Rossney](https://github.com/dcr8898).
 
 Technologies used:
 
